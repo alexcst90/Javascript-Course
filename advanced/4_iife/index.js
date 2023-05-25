@@ -25,3 +25,47 @@ console.log("%c3. Tercera variante de IIFE", 'color: #229179; font-size: 16px;')
 }());
 
 console.log(window.newName);
+
+
+function delayedFunction(x){
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(x);
+        },0);
+    });
+};
+
+// (async function(x) {
+//     let p_a = delayedFunction(20);
+//     let p_b = delayedFunction(30);
+//     return x + await p_a + await p_b;
+// })(0).then(v => {
+//     console.log(v);
+// });
+
+const chargeBattery = (percentaje) => ((copyPercentage) => {
+    let percentage = copyPercentage;
+    const internalMechanism = ()=>{
+        console.log('Direccionando bateria a este dispositivo');
+    };
+    internalMechanism();
+    return {
+        charge(amount) {
+            if(percentage >= amount){
+                percentage -= amount;
+                return percentage;
+            }
+            return 'Bateria insuficiente';
+        },
+    };
+    
+})(percentaje);
+
+const firstPhone = chargeBattery(100);
+console.log(firstPhone.percentage);
+console.log(firstPhone.charge(10));
+console.log(firstPhone.charge(30));
+console.log(firstPhone.doBadThings);
+const secondPhone= chargeBattery(20);
+console.log('secondPhone: ' + secondPhone.charge(30));
+console.log('secondPhone: ' + secondPhone.charge(20));
